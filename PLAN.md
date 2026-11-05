@@ -92,5 +92,32 @@ By payoff for print quality:
   placeholder (no [mcu]) until the board is flashed.
 - Klipper firmware built: `firmware/klipper-20261027.bin`.
 
+- 2026-10-28/29: board flashed, Klipper running the original Ender 3 (blue 12864
+  screen). Probe lowered, Z coupler tightened (fixed the height loss), PID + bed
+  mesh saved, z_offset 2.950 from first-layer prints. z_guard extra added.
+  Ender Studio (our web UI) on port 80, Mainsail on 8080.
+- 2026-11-05: filament presets (PLA, PLA+, Silk, PETG, TPU, ABS/ASA) with
+  per-filament first-layer squish; temperature tower follows the filament.
+  Repo public at https://github.com/SnorbWorks/ender3-pi. Ender Studio now
+  updates itself from it (studio/server/updater.py + studio/deploy/install.sh).
+  None of the 2026-11-05 work is on the Pi yet (it was off).
+
 ## Next
-Flash the board from the SD card, then write the real `printer.cfg`.
+1. Power the Pi. One-time switch to the git install (the old ~/studio was
+   rsynced in): `git clone https://github.com/SnorbWorks/ender3-pi ~/ender3-pi`
+   then `sh ~/ender3-pi/studio/deploy/install.sh` (moves the old ~/studio aside
+   and links ~/studio into the checkout). Check Klipper loads the new macros
+   ([save_variables], _STUDIO_FILAMENT, _CLIENT_VARIABLE) and the Maintenance
+   page shows "Software updates".
+2. Test an update end to end: push a small commit, `sh studio/deploy/push.sh`.
+3. Owner: fit the Capricorn tube, re-check Z offset, PETG temperature tower,
+   then a first PETG print (tune squish live, "Save for this filament").
+
+## Publishing updates
+Commit on the Mac, then `sh studio/deploy/push.sh`: pushes to GitHub and, if
+the Pi is on, asks it to install now. Otherwise the Pi checks every 6 hours
+(and 2 minutes after boot) and installs when idle (not printing, heaters off,
+not slicing). If Ender Studio or Klipper doesn't come back after an update,
+install.sh rolls back to the previous commit and won't retry that commit on
+its own. Firmware (`firmware/`) and `config/printer.cfg` are NOT pushed by
+updates: printer.cfg on the Pi is the live copy (SAVE_CONFIG writes it).
