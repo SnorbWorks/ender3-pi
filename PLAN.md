@@ -102,16 +102,18 @@ By payoff for print quality:
   updates itself from it (studio/server/updater.py + studio/deploy/install.sh).
   None of the 2026-11-05 work is on the Pi yet (it was off).
 
+- 2026-11-05 evening: Pi switched to the git install (~/ender3-pi, ~/studio ->
+  checkout, old copy kept as ~/studio.old-20261105-192607). New macros load
+  with no config errors. Two pushed updates installed end to end via push.sh
+  (84aaecf, 0f67a59). Printer USB was unplugged/off at the time, so nothing
+  printer-side (squish macros in a real print) is tested yet.
+
 ## Next
-1. Power the Pi. One-time switch to the git install (the old ~/studio was
-   rsynced in): `git clone https://github.com/SnorbWorks/ender3-pi ~/ender3-pi`
-   then `sh ~/ender3-pi/studio/deploy/install.sh` (moves the old ~/studio aside
-   and links ~/studio into the checkout). Check Klipper loads the new macros
-   ([save_variables], _STUDIO_FILAMENT, _CLIENT_VARIABLE) and the Maintenance
-   page shows "Software updates".
-2. Test an update end to end: push a small commit, `sh studio/deploy/push.sh`.
-3. Owner: fit the Capricorn tube, re-check Z offset, PETG temperature tower,
-   then a first PETG print (tune squish live, "Save for this filament").
+1. Owner: connect/switch on the printer, fit the Capricorn tube, re-check the
+   Z offset, PETG temperature tower, then a first PETG print (tune squish
+   live, "Save for this filament").
+2. Watch the first real PRINT_START with MATERIAL=petg: offset applied,
+   _STUDIO_FILAMENT set, PRINT_END/cancel clears it.
 
 ## Publishing updates
 Commit on the Mac, then `sh studio/deploy/push.sh`: pushes to GitHub and, if
