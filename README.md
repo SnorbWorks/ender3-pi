@@ -36,3 +36,5 @@ The Pi checks this repo every 6 hours and installs new commits on `master` when
 the printer is idle. If anything fails to start, it rolls itself back. The
 Maintenance page shows the status and has *Check now*, *Install now* and an
 auto-update switch. To publish an update, commit and run `sh studio/deploy/push.sh`.
+
+The Pi logs each update to `~/printer_data/logs/studio_update.log`.
