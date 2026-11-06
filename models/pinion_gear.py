@@ -5,7 +5,10 @@ Those numbers fit 20 diametral pitch (module 1.27 mm): 48T outside diameter
 Centre distance (48 + 13) / 2 / 20 = 1.525" = 38.74 mm.
 
 1" long: 0.5" of teeth on top of a plain 0.5" hub at the gear's outside
-diameter, 5 mm bore (printed slightly over size; PETG holes shrink).
+diameter, 5 mm bore (printed slightly over size; PETG holes shrink).  The
+hub has an M3 set screw with a nut slot (open on the bottom face): it grips a
+round shaft or the flat of a D-shaft.  bore_test.stl is a strip of holes,
+4.9-5.4 mm, to find the size that's snug on the actual shaft.
 
 The teeth are cut the way a hob cuts them: a straight-sided rack is rolled
 around the blank and subtracted at every step.  That gives true involute
@@ -30,6 +33,8 @@ RO = R + M                    # outside radius 9.525 (0.75" OD)
 TEETH_L = 0.5 * IN            # toothed length
 HUB_L = 0.5 * IN              # plain hub length
 BORE = 5.2                    # 5 mm shaft; printed holes come out ~0.1-0.2 small
+SCREW_D = 3.3                 # M3 clearance
+NUT_W, NUT_T = 5.8, 2.6       # M3 nut 5.5 across flats x 2.4, plus clearance
 BACKLASH = 0.15               # mm thinner teeth: room for print tolerance
 SEG = 192
 
@@ -78,7 +83,24 @@ def pinion(pa):
     cone = Manifold.cylinder(ch, RO - ch, RO, SEG)
     hub = (hub - Manifold.cylinder(ch, RO + 1, RO + 1, SEG)) + cone
     bore = Manifold.cylinder(TEETH_L + HUB_L + 2, BORE / 2, BORE / 2, 64).translate([0, 0, -1])
-    return (hub + teeth) - bore
+    # set screw: radial along +x at mid-hub; nut slot drops in from the bottom
+    zc = HUB_L / 2
+    screw = (Manifold.cylinder(RO + 2, SCREW_D / 2, SCREW_D / 2, 32)
+             .rotate([0, 90, 0]).translate([0, 0, zc]))
+    x0 = BORE / 2 + 1.6                            # wall left between nut and bore
+    nut = Manifold.cube([NUT_T, NUT_W, zc + NUT_W / 2 * 1.16 + 1]).translate([x0, -NUT_W / 2, -1])
+    return (hub + teeth) - bore - screw - nut
+
+
+def bore_test():
+    """Strip with holes 4.9 ... 5.4 mm (left to right); the cut corner is the 4.9 end."""
+    sizes = [4.9, 5.0, 5.1, 5.2, 5.3, 5.4]
+    w, d, h, step = 10 * len(sizes) + 4, 12, 5, 10
+    m = Manifold.cube([w, d, h])
+    m = m - Manifold.cube([4, 4, h + 2]).rotate([0, 0, 45]).translate([0, -2.8, -1])
+    for i, s in enumerate(sizes):
+        m = m - Manifold.cylinder(h + 2, s / 2, s / 2, 64).translate([7 + i * step, d / 2, -1])
+    return m
 
 
 def write_stl(m, path, dx, dy):
@@ -104,3 +126,6 @@ if __name__ == "__main__":
         print(f"{name}: {write_stl(g, name, 117.5, 117.5)} triangles, "
               f"OD {2 * max(rs):.2f} mm, root dia {2 * min(rs):.2f} mm, "
               f"volume {g.volume() / 1000:.2f} cm3")
+    t = bore_test()
+    assert t.status().name == "NoError"
+    print("bore_test.stl:", write_stl(t, "bore_test.stl", 85, 60), "triangles")
