@@ -32,8 +32,9 @@ Ender Studio is then at `http://<pi>/` and Mainsail moves to port 8080.
 
 ## Updates
 
-The Pi checks this repo every 6 hours and installs new commits on `master` when
-the printer is idle. If anything fails to start, it rolls itself back. The
+The Pi checks this repo each time it starts up (once Klipper, Moonraker and
+nginx have settled) and installs new commits on `master` when the printer is
+idle. If anything fails to start, it rolls itself back. The
 Maintenance page shows the status and has *Check now*, *Install now* and an
 auto-update switch. To publish an update, commit and run `sh studio/deploy/push.sh`.
 

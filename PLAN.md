@@ -117,8 +117,8 @@ By payoff for print quality:
 
 ## Publishing updates
 Commit on the Mac, then `sh studio/deploy/push.sh`: pushes to GitHub and, if
-the Pi is on, asks it to install now. Otherwise the Pi checks every 6 hours
-(and 2 minutes after boot) and installs when idle (not printing, heaters off,
+the Pi is on, asks it to install now. Otherwise the Pi checks once per
+start-up (after the services have stayed up for a minute) and installs when idle (not printing, heaters off,
 not slicing). If Ender Studio or Klipper doesn't come back after an update,
 install.sh rolls back to the previous commit and won't retry that commit on
 its own. Firmware (`firmware/`) and `config/printer.cfg` are NOT pushed by
