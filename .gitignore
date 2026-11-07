@@ -1,3 +1,9 @@
 .cadvenv/
 .DS_Store
 __pycache__/
+# Print files: generated from models/*.py; the printer keeps its own copies
+*.stl
+*.3mf
+*.obj
+*.gcode
+*.bgcode
