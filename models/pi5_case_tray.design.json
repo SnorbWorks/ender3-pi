@@ -1,0 +1,266 @@
+{
+ "version": 1,
+ "name": "pi5_case_tray",
+ "units": "mm",
+ "precision": 2,
+ "grid": 1,
+ "stock": {
+  "min": [
+   -10,
+   -10,
+   0
+  ],
+  "max": [
+   10,
+   10,
+   20
+  ],
+  "off": true
+ },
+ "views": [
+  "top",
+  "front",
+  "right"
+ ],
+ "features": [
+  {
+   "id": "pi1",
+   "type": "rect",
+   "view": "top",
+   "cu": 45.5,
+   "cv": 31,
+   "w": 91,
+   "h": 62,
+   "r": 0,
+   "corner": 3,
+   "d0": 0,
+   "d1": 25.6,
+   "op": "add",
+   "through": false
+  },
+  {
+   "id": "pi2",
+   "type": "rect",
+   "view": "top",
+   "cu": 45.5,
+   "cv": 31,
+   "w": 87,
+   "h": 58,
+   "r": 0,
+   "corner": 0,
+   "d0": 26.6,
+   "d1": 2,
+   "op": "cut",
+   "through": false
+  },
+  {
+   "id": "pi3",
+   "type": "circle",
+   "view": "top",
+   "cu": 6.5,
+   "cv": 6.5,
+   "w": 0,
+   "h": 0,
+   "r": 3,
+   "corner": 0,
+   "d0": 1.99,
+   "d1": 5,
+   "op": "add",
+   "through": false,
+   "pattern": {
+    "kind": "linear",
+    "count": 2,
+    "step": [
+     58,
+     0,
+     0
+    ],
+    "center": [
+     0,
+     0,
+     0
+    ],
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "angle": 360
+   },
+   "mirror": {
+    "axis": 1,
+    "at": 31
+   }
+  },
+  {
+   "id": "pi4",
+   "type": "circle",
+   "view": "top",
+   "cu": 6.5,
+   "cv": 6.5,
+   "w": 0,
+   "h": 0,
+   "r": 1.2,
+   "corner": 0,
+   "d0": 26.4,
+   "d1": 0.8,
+   "op": "cut",
+   "through": false,
+   "pattern": {
+    "kind": "linear",
+    "count": 2,
+    "step": [
+     58,
+     0,
+     0
+    ],
+    "center": [
+     0,
+     0,
+     0
+    ],
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "angle": 360
+   },
+   "mirror": {
+    "axis": 1,
+    "at": 31
+   }
+  },
+  {
+   "id": "pi5",
+   "type": "rect",
+   "view": "right",
+   "cu": 31,
+   "cv": 15.55,
+   "w": 55,
+   "h": 22.1,
+   "r": 0,
+   "corner": 0,
+   "d0": 92,
+   "d1": 88,
+   "op": "cut",
+   "through": false
+  },
+  {
+   "id": "pi6",
+   "type": "rect",
+   "view": "front",
+   "cu": 28.2,
+   "cv": 10.05,
+   "w": 42,
+   "h": 12.1,
+   "r": 0,
+   "corner": 0,
+   "d0": 1,
+   "d1": -3,
+   "op": "cut",
+   "through": false
+  },
+  {
+   "id": "pi7",
+   "type": "rect",
+   "view": "left",
+   "cu": -31,
+   "cv": 4,
+   "w": 16,
+   "h": 2.8,
+   "r": 0,
+   "corner": 0,
+   "d0": 1,
+   "d1": -3,
+   "op": "cut",
+   "through": false
+  },
+  {
+   "id": "pi8",
+   "type": "rect",
+   "view": "left",
+   "cu": -31,
+   "cv": 14.6,
+   "w": 46,
+   "h": 14,
+   "r": 0,
+   "corner": 0,
+   "d0": 1,
+   "d1": -3,
+   "op": "cut",
+   "through": false
+  },
+  {
+   "id": "pi9",
+   "type": "rect",
+   "view": "back",
+   "cu": -14.5,
+   "cv": 15.8,
+   "w": 3,
+   "h": 9.6,
+   "r": 0,
+   "corner": 0,
+   "d0": 63,
+   "d1": 59,
+   "op": "cut",
+   "through": false,
+   "pattern": {
+    "kind": "linear",
+    "count": 9,
+    "step": [
+     7,
+     0,
+     0
+    ],
+    "center": [
+     0,
+     0,
+     0
+    ],
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "angle": 360
+   }
+  },
+  {
+   "id": "pi10",
+   "type": "rect",
+   "view": "bottom",
+   "cu": 18.5,
+   "cv": -31,
+   "w": 3,
+   "h": 28,
+   "r": 0,
+   "corner": 0,
+   "d0": 1,
+   "d1": -3,
+   "op": "cut",
+   "through": false,
+   "pattern": {
+    "kind": "linear",
+    "count": 7,
+    "step": [
+     7,
+     0,
+     0
+    ],
+    "center": [
+     0,
+     0,
+     0
+    ],
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "angle": 360
+   }
+  }
+ ],
+ "dims": []
+}

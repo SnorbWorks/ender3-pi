@@ -144,9 +144,17 @@ views (third-angle), one shared feature list, STL straight to Prepare.
   (row/circle) and mirror per shape in the panel, body on/off (`stock.off`, for loose
   gears), a features list. Gear flanks are 2 least-squares Béziers each (within 0.5% of
   the module of the true involute) to keep edge counts and HLR time down.
-- Known limits: a fillet whose edge moved (e.g. the body resized) silently drops that
-  edge; helical gears take a few seconds to build; dimensions sit outside their view and
-  can overlap a neighbouring one; Studio's New still uses a browser confirm().
+- Round 4 (2026-11-09): fillets follow their edges (`FilletSpec.refs`: the shape whose box
+  the edge sits on + where in it, re-found after every build; an edge that's really gone
+  shows red with Re-pick); views grow to fit their dimensions (layout margins); projection
+  lines for the selection + hidden lines toggle in a Views tab; Send to Library (STL + the
+  design saved under the same name); Library "Send to Design" / Open… opens that saved
+  design, else the STL as the body (`Project.base`, sewn into a solid in the worker, max
+  60k triangles; ~5 s a change on the Pi tray STL since curves are facets).
+  `studio/design/tools/pi5_case_design.mjs` turns models/pi5_case.py into Design projects
+  (models/pi5_case_*.design.json, uploaded to the Pi as designs pi5_case_tray/_lid).
+- Known limits: helical gears take a few seconds to build; an STL body's own walls can't
+  be resized (no shapes in an STL); Studio's New still uses a browser confirm().
 
 Build order (spec): 1-7 all DONE. Still open from the spec: print-orientation override in
 the tool (Prepare's auto-orient is used now), shell (spec says later).
