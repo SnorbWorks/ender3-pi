@@ -108,6 +108,33 @@ By payoff for print quality:
   (84aaecf, 0f67a59). Printer USB was unplugged/off at the time, so nothing
   printer-side (squish macros in a real print) is tested yet.
 
+
+## Design tab (Ortho CAD), started 2026-11-09
+The owner's spec: `studio/design/SPEC.md`. CAD by drawing in orthographic drafting
+views (third-angle), one shared feature list, STL straight to Prepare.
+
+- Source: `studio/design/src` (TypeScript). Build on the Mac with
+  `cd studio/design && npm install && npm test` (`npm test` builds too); the output in
+  `studio/web/design/` IS committed (the Pi never builds). `replicad_single.wasm` (22 MB,
+  OpenCASCADE) only changes when replicad is upgraded.
+- All geometry runs in the browser (a worker): the Pi only serves files.
+  The tab loads on first visit, so Prepare etc. never pay for the engine.
+- Model: stock block + ordered features {rect|circle, view drawn in, centre/size in
+  that view's u/v, d0 (face) / d1 (end) as depth toward that view's viewer, add|cut,
+  through}. Hidden lines come from OpenCASCADE HLR per view; a visible line wins over a
+  hidden one in the same place (`subtractCovered`), duplicates dropped (`dedupe`).
+- Choices the owner made: Design tab next to Prepare; Mac mouse/trackpad only; gear tool
+  takes module or DP, 14.5/20/25 deg, bore none/round/D-shaft + set screw; checkpoint
+  after build-order steps 1-3.
+- Projects autosave in the browser (localStorage) for now; save/load to the Pi is step 7.
+
+Build order (spec): 1 sheet + ghost views + alignment DONE · 2 rect/circle, add/cut,
+depth dragging, cross-view selection DONE · 3 hidden lines + STL to Prepare DONE ·
+4 rounded rect (corner radius works already), polygons, hidden-line tool · 5 gears ·
+6 edge fillets/chamfers · 7 save/load on the Pi. Also still to do from the spec:
+dimension tool, pattern, mirror, text, polyline, print-orientation override in the tool
+(Prepare's auto-orient is used now), inch display works but no dimension entry yet.
+
 ## Next
 1. Owner: connect/switch on the printer, fit the Capricorn tube, re-check the
    Z offset, PETG temperature tower, then a first PETG print (tune squish
