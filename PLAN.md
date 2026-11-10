@@ -126,21 +126,30 @@ views (third-angle), one shared feature list, STL straight to Prepare.
 - Choices the owner made: Design tab next to Prepare; Mac mouse/trackpad only; gear tool
   takes module or DP, 14.5/20/25 deg, bore none/round/D-shaft + set screw; checkpoint
   after build-order steps 1-3.
-- Projects autosave in the browser (localStorage) for now; save/load to the Pi is step 7.
+- Projects autosave in the browser (localStorage) and Save/Open (⌘S) keeps them on the Pi:
+  `/studio-api/designs/<name>.json` -> `~/printer_data/design/`.
 - 2026-11-09 owner feedback round 1 (done): tools in a left toolbox with tool cursors;
   multi-select (shift-click, drag a box); the bar above follows the selection (align
   left/centre/right/top/middle/bottom to each other or to the part, distribute, delete);
   alignment uses the active view (last clicked, label highlighted); ghost views are small
   rounded boxes and empty rows/columns shrink; Option-click a rectangle side,
   Option-Shift-click the side next to it = their corner, with its own radius
-  (Feature.corners).
+  (Feature.corners). Rounds 2-3: body selectable, bigger views, zoom tool, panel splitter.
+- Steps 4-7 + the rest of the spec's tools (done 2026-11-09): polygon (P), line/outline (L),
+  gear (G: spur/helical/ring/rack, module or DP, 14.5/20/25, backlash, bore none/round/D,
+  set screw, hub; a new gear offers to mesh with one already there), text (T, DejaVu fonts),
+  hidden-line toggle (H: new shapes go on the far face as pockets, `Feature.far`), edge
+  tool (E: pick edges in any view, fillet/chamfer = a 'fillet' feature that remembers each
+  edge by a point on it), dimensions (D; double-click the number to type a size), pattern
+  (row/circle) and mirror per shape in the panel, body on/off (`stock.off`, for loose
+  gears), a features list. Gear flanks are 2 least-squares Béziers each (within 0.5% of
+  the module of the true involute) to keep edge counts and HLR time down.
+- Known limits: a fillet whose edge moved (e.g. the body resized) silently drops that
+  edge; helical gears take a few seconds to build; dimensions sit outside their view and
+  can overlap a neighbouring one; Studio's New still uses a browser confirm().
 
-Build order (spec): 1 sheet + ghost views + alignment DONE · 2 rect/circle, add/cut,
-depth dragging, cross-view selection DONE · 3 hidden lines + STL to Prepare DONE ·
-4 rounded rect (corner radius works already), polygons, hidden-line tool · 5 gears ·
-6 edge fillets/chamfers · 7 save/load on the Pi. Also still to do from the spec:
-dimension tool, pattern, mirror, text, polyline, print-orientation override in the tool
-(Prepare's auto-orient is used now), inch display works but no dimension entry yet.
+Build order (spec): 1-7 all DONE. Still open from the spec: print-orientation override in
+the tool (Prepare's auto-orient is used now), shell (spec says later).
 
 ## Next
 1. Owner: connect/switch on the printer, fit the Capricorn tube, re-check the
