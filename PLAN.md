@@ -127,6 +127,13 @@ views (third-angle), one shared feature list, STL straight to Prepare.
   takes module or DP, 14.5/20/25 deg, bore none/round/D-shaft + set screw; checkpoint
   after build-order steps 1-3.
 - Projects autosave in the browser (localStorage) for now; save/load to the Pi is step 7.
+- 2026-11-09 owner feedback round 1 (done): tools in a left toolbox with tool cursors;
+  multi-select (shift-click, drag a box); the bar above follows the selection (align
+  left/centre/right/top/middle/bottom to each other or to the part, distribute, delete);
+  alignment uses the active view (last clicked, label highlighted); ghost views are small
+  rounded boxes and empty rows/columns shrink; Option-click a rectangle side,
+  Option-Shift-click the side next to it = their corner, with its own radius
+  (Feature.corners).
 
 Build order (spec): 1 sheet + ghost views + alignment DONE · 2 rect/circle, add/cut,
 depth dragging, cross-view selection DONE · 3 hidden lines + STL to Prepare DONE ·
