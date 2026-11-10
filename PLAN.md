@@ -1,5 +1,9 @@
 # Ender 3 + Pi — Plan
 
+> **2026-11-09:** the web UI (Ender Studio, `studio/`) moved to its own repo and is now
+> **SnorbStudio**, https://github.com/SnorbWorks/snorbstudio (the Design tab is now **SnorbCAD**).
+> Paths like `studio/...` below refer to that repo (minus the `studio/` prefix).
+
 Started 2026-10-27. A Raspberry Pi 4 (1 GB, `raspberrypi-1`, 10.0.0.139) runs the
 printer over USB with Klipper, and a web UI of our own controls it over Wi-Fi.
 
